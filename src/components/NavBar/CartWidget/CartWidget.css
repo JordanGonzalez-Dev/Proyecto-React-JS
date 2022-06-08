@@ -1,0 +1,21 @@
+.iconCart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.iconCart img {
+    width: 4vw;
+    min-width: 40px;
+    max-width: 50px;
+    height: auto;
+    margin: 10px;
+}
+
+a {
+    cursor: pointer;
+}
+
+a:active {
+    transform: translateY(5px);
+}

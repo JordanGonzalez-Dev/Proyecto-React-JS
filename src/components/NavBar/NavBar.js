@@ -1,19 +1,20 @@
 import React from "react";
 import "./NavBar.css";
 import Button from '@mui/material/Button';
-import logo from "../img/GamewareLogo.png";
+import logo from "./img/GamewareLogo.png";
+import {CartWidget} from "./CartWidget/CartWidget";
 
 
 export const NavBar = () => {
     return (
-        <header class="gradientAnim">
-            <nav class="contenedorNav fadeAnim">
+        <header className="gradientAnim">
+            <nav className="contenedorNav fadeAnim">
                 <div>
-                    <a class="logo" href="none">
-                        <img class="voltearLogo" src={logo} alt="logo de productos" />
+                    <a className="logo" href="none">
+                        <img className="voltearLogo" src={logo} alt="logo de productos" />
                     </a>
                 </div>
-                <ul class="contenedorBotones">
+                <ul className="contenedorBotones">
                     <li>
                         <Button variant="contained" color="secondary">Placas de Video</Button>
                     </li>
@@ -24,6 +25,9 @@ export const NavBar = () => {
                         <Button variant="contained" color="secondary">Notebooks</Button>
                     </li>
                 </ul>
+                <div className="iconCart">
+                    <CartWidget/>
+                </div>
             </nav>
     </header>
     );
