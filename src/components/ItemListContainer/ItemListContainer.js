@@ -1,10 +1,20 @@
 import React from "react";
 import "./ItemListContainer.css";
 
-export const ItemListContainer = () => {
+export const ItemListContainer = (props) => {
+    const {texto} = props;
     return (
         <section className="text">
-            <h1> Próximamente agregaremos productos! </h1>
+            <TextComponent textContent={texto}/>
         </section>
+    );
+};
+
+const TextComponent = props => {
+    const {textContent} = props;
+    return (
+        <>
+        <h1> {textContent} </h1>
+        </>
     );
 };

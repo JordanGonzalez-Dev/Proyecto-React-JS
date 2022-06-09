@@ -5,7 +5,7 @@ import iconCart from "./img/cart.svg";
 export const CartWidget = () => {
     return (
         <a href="none">
-            <img src={iconCart} alt="logo de carrito" />
+            <img src={iconCart} alt="logo de carrito"/>
         </a>
     );
 };
