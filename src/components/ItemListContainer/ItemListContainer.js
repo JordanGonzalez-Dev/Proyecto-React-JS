@@ -5,16 +5,7 @@ export const ItemListContainer = (props) => {
     const {texto} = props;
     return (
         <section className="text">
-            <TextComponent textContent={texto}/>
+            <h1> {texto} </h1> 
         </section>
-    );
-};
-
-const TextComponent = props => {
-    const {textContent} = props;
-    return (
-        <>
-        <h1> {textContent} </h1>
-        </>
     );
 };
