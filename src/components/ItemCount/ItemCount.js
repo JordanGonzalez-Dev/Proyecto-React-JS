@@ -17,16 +17,11 @@ export const ItemCount = ({stock, initial}) => {
         }
     }
 
-    function onAdd () {
-        console.log({count})
-    }
-
     return (
         <div className="divBtn">
-            <Button onClick={() => {subs(); onAdd();}} variant="contained" color="error" disabled={!count}>-</Button>
+            <Button onClick={subs} variant="contained" color="error" disabled={!count}>-</Button>
             <span className="spanBtn">{count}</span>
-            <Button onClick={() => {add(); onAdd();}} variant="contained" color="success" disabled={count > stock-1}>+</Button>
+            <Button onClick={add} variant="contained" color="success" disabled={count > stock-1}>+</Button>
         </div>
     )
-    
 }

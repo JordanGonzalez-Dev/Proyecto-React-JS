@@ -10,7 +10,7 @@ export const NavBar = () => {
         <header className="gradientAnim">
             <nav className="contenedorNav fadeAnim">
                 <div>
-                    <a className="logo" href="none">
+                    <a className="logo" href="/#">
                         <img className="voltearLogo" src={logo} alt="logo de productos" />
                     </a>
                 </div>
