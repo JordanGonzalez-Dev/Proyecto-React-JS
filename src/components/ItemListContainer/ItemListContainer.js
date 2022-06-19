@@ -11,14 +11,14 @@ export const ItemListContainer = (props) => {
     useEffect(() => {
         elFetch(3000, products)
         .then(resultado => setItems(resultado))
+        .catch(err => {console.log("Error: " + err);})
     }, [items]);
     return (
         <>
         <h1 className="text"> {texto} </h1>
         <section className="containerSection">
-            
             {
-                items?.length <= 0 ? <Spinner/> : <ItemList products={items}/>
+                items.length ? <ItemList products={items}/> : <Spinner/>
             }
         </section>
         </>
