@@ -1,7 +1,9 @@
 const elFetch = (time, task) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            resolve ? resolve(task) : reject("Hubo un problema")
+            if (task) {
+                resolve(task)
+            } else {reject("Hubo un problema")}
         }, time)
     })
 }
