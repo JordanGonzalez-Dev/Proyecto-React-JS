@@ -11,7 +11,7 @@ export const ItemListContainer = (props) => {
     useEffect(() => {
         elFetch(3000, products)
         .then(resultado => setItems(resultado))
-        .catch(error => {console.log("Error: " + error);})
+        .catch(error => {console.log("Error: " + error)})
     }, [items]);
     return (
         <>

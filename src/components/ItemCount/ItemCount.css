@@ -1,7 +1,11 @@
-.spanBtn {
+.divBtn {
     padding: 20px;
 }
 
-.divBtn {
+.divBtn Button {
+    margin: 0;
+}
+
+.spanNum {
     padding: 20px;
 }
