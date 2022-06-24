@@ -13,4 +13,3 @@ La idea viene de páginas que suelo frecuentar sobre compras on-line de artícul
 ### Enfoque
 
 El enfoque está en tratar de hacer una página llamativa, que de toda una experiencia visual al cliente.
-
