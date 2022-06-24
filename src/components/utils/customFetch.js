@@ -1,4 +1,4 @@
-const elFetch = (time, task) => {
+const customFetch = (time, task) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             if (task) {
@@ -8,4 +8,4 @@ const elFetch = (time, task) => {
     })
 }
 
-export default elFetch;
+export default customFetch;

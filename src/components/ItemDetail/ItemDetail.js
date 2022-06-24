@@ -1,15 +1,14 @@
-import { Button } from "@mui/material";
 import React from "react";
 import "./ItemDetail.css";
-import pictureUrl from "../utils/img/msi3070.png"
+import { Button } from "@mui/material";
 import { ItemCount } from "../ItemCount/ItemCount";
 
 export const ItemDetail = ({item}) => {
     return (
         <>
-            <div className="contenedorItemDetail">
+            <div key={item.id} className="contenedorItemDetail">
                 <div className="contenedorImg">
-                    <img src={pictureUrl} alt="Imagen del producto"></img>
+                    <img src={item.pictureUrl} alt={item.alt}></img>
                 </div>
                 <div className="contenedorDetalles">
                     <h1>{item.title}</h1>

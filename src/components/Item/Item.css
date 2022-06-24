@@ -2,3 +2,16 @@
     max-width: 250px;
     text-align: center;
 }
+
+.btnVerMas {
+    text-align: center;
+    margin: 20px;
+}
+
+.btnVerMas a {
+    border: solid 2px black;
+    border-radius: 8%;
+    padding: 5px;
+    background-color: rgb(90, 0, 150);
+    color: white;
+}
