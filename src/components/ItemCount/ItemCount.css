@@ -1,11 +1,10 @@
 .divBtn {
-    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
 
 .divBtn Button {
-    margin: 0;
-}
-
-.spanNum {
-    padding: 20px;
+    margin: 15px;
 }
