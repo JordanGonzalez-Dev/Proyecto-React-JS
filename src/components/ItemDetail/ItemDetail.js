@@ -6,9 +6,9 @@ import { Button } from "@mui/material";
 
 export const ItemDetail = ({item}) => {
 
-    const [added, setAdded] = useState();
-    console.log(added);
-    const quantityToAdd = (value) => setAdded(value)
+    const [added, setAdded] = useState(0);
+
+    const quantityToAdd = (value) => setAdded(value);
 
     return (
         <>
