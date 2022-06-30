@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import "./ItemCount.css"
 import Button from '@mui/material/Button';
 
-export const ItemCount = ({stock, onAdd, setAdded}) => {
+export const ItemCount = ({stock, onAdd}) => {
 
     const [count, setCount] = useState(1);
-
+    
     function add () {
         if (count < stock) {
             setCount (count + 1)
@@ -23,7 +23,7 @@ export const ItemCount = ({stock, onAdd, setAdded}) => {
             <Button onClick={subs} variant="contained" color="error" disabled={count===1}>-</Button>
             <span>{count}</span>
             <Button onClick={add} variant="contained" color="success" disabled={count > stock-1}>+</Button>
-            <Button onClick={() => onAdd(setAdded + 1)} variant="contained" disabled={count > stock}>Agregar al carrito</Button>
+            <Button onClick={() => onAdd(count)} variant="contained" disabled={count > stock}>Agregar al carrito</Button>
         </div>
     )
 }
