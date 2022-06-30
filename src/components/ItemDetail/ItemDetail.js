@@ -6,14 +6,9 @@ import { Button } from "@mui/material";
 
 export const ItemDetail = ({item}) => {
 
-    const [count, setCount] = useState(1);
-    const [added, setAdded] = useState(false);
+    const [added, setAdded] = useState(0);
 
-    const response = () => {
-        if (count > 0) {
-            setAdded(true)
-        }
-    }
+    const quantityToAdd = (value) => setAdded(value)
 
     return (
         <>
@@ -28,7 +23,7 @@ export const ItemDetail = ({item}) => {
                         <>
                         <h2>$ {item.price}</h2>
                         <p>Hay disponibles: {item.stock} unidades.</p>
-                        <ItemCount stock={item.stock} count={count} setCount={setCount} onAdd={response}/>
+                        <ItemCount stock={item.stock} setAdded={setAdded} onAdd={quantityToAdd}/>
                         </> : <Link to="/cart"><Button variant="contained" color="secondary">Finalizar compra</Button></Link>
                     }
                 </div>
