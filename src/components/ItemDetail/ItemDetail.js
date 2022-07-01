@@ -1,14 +1,24 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./ItemDetail.css";
 import { ItemCount } from "../ItemCount/ItemCount";
+import { CartContext } from "../CartContext/CartContext";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 
 export const ItemDetail = ({item}) => {
 
-    const [added, setAdded] = useState(0);
+    const {agregarAlCarrito, isInCart} = useContext(CartContext);
 
-    const quantityToAdd = (value) => setAdded(value);
+    const [quantity, setQuantity] = useState(null);
+    console.log("quantity:" + quantity );
+
+    function onAdd(quantity) {
+        setQuantity(quantity);
+
+        if (quantity > 0) {
+            agregarAlCarrito({...item, quantity})
+        }
+    }
 
     return (
         <>
@@ -19,12 +29,15 @@ export const ItemDetail = ({item}) => {
                 <div className="contenedorDetalles">
                     <h1>{item.title}</h1>
                     {
-                        !added ? 
+                        !isInCart(item.id) ? 
                         <>
                         <h2>$ {item.price}</h2>
                         <p>Hay disponibles: {item.stock} unidades.</p>
-                        <ItemCount stock={item.stock} setAdded={setAdded} onAdd={quantityToAdd}/>
-                        </> : <Link to="/cart"><Button variant="contained" color="secondary">Finalizar compra</Button></Link>
+                        <ItemCount stock={item.stock} initial={1} onAdd={onAdd}/>
+                        </> : 
+                        <Link to="/cart">
+                            <Button variant="contained" color="secondary">{`Finalizar compra (Cantidad: ${quantity})`}</Button>
+                        </Link>
                     }
                 </div>
             </div>

@@ -4,9 +4,11 @@ import { NavBar } from "../NavBar/NavBar";
 import { ItemListContainer } from "../ItemListContainer/ItemListContainer";
 import { ItemDetailContainer } from "../ItemDetailContainer/ItemDetailContainer";
 import { CartView } from "../CartView/CartView";
+import { CartContextProvider } from "../CartContext/CartContext";
 
 export const AppRouting = () => {
     return (
+        <CartContextProvider>
         <BrowserRouter>
             <NavBar/>
             <Routes>
@@ -17,5 +19,6 @@ export const AppRouting = () => {
             <Route path='/cart' element={<CartView/>}/>
             </Routes>
         </BrowserRouter>
+        </CartContextProvider>
     )
 }
