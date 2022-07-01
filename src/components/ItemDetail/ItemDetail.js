@@ -16,7 +16,7 @@ export const ItemDetail = ({item}) => {
         setQuantity(quantity);
 
         if (quantity > 0) {
-            addToCart({...item, quantity})
+            addToCart({quantity, ...item})
         }
     }
 

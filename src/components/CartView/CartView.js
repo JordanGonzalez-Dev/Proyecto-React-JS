@@ -1,32 +1,35 @@
 import React, { useContext } from 'react';
 import { CartContext } from '../CartContext/CartContext';
+import { Button } from '@mui/material';
+import "./CartView.css";
 
 export const CartView = () => {
 
-    const {cartItems, emptyCart, removeFromCart, quantity} = useContext(CartContext);
+    const {cartItems, emptyCart, removeFromCart} = useContext(CartContext);
+    console.log(cartItems);
 
     return (
-    <div className='container my-5'>
+    <main className="cartView">
         <h2>Cart View</h2>
-        <hr/>
-        <section className="card m-3" style={{ width: '12rem' }}> 
+        <section className=""> 
         {
         cartItems.map((prod)=>(
-        <div className="card-body">
-            <h3 className="card-title">{prod.name}</h3>
-            <p className="card-text">Precio: ${prod.price}</p>
-            <p className="card-text">Cantidad: {quantity}</p>
-            <button onClick={() => {removeFromCart(prod.id)}}>
-            Tacho</button>
+        
+        <div key= {prod.id} className="">
+            <h3 className="">{prod.title}</h3>
+            <p className="">Precio: ${prod.price}</p>
+            <p className="">Cantidad: {prod.quantity}</p>
+            <Button variant='contained' color='error' onClick={() => {removeFromCart(prod.id)}}>
+            Eliminar</Button>
         </div>
         ))
         }
         </section>
         <hr/>
         <div>
-            <button onClick={emptyCart}>Vaciar</button>
-            <button>Finalizar</button>
+            <Button variant='contained' color='secondary' onClick={emptyCart}>Vaciar</Button>
+            <Button variant='contained' color='success'>Finalizar</Button>
         </div>
-    </div>
+    </main>
     )
 }
