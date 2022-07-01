@@ -10,25 +10,24 @@ export const CartView = () => {
 
     return (
     <main>
-        <h2>Cart View</h2>
+        <h2>Carrito</h2>
         <section className="cartView"> 
         {
-        cartItems.map((prod)=>(
-        
-        <div key= {prod.id} className="">
-            <h3 className="">{prod.title}</h3>
-            <p className="">Precio: ${prod.price}</p>
-            <p className="">Cantidad: {prod.quantity}</p>
-            <Button variant='contained' color='error' onClick={() => {removeFromCart(prod.id)}}>
-            Eliminar</Button>
-        </div>
-        ))
+            cartItems.length ?
+            cartItems.map((prod)=>(
+                    <div key= {prod.id} className="">
+                        <h3 className="">{prod.title}</h3>
+                        <p className="">Precio: ${prod.price}</p>
+                        <p className="">Cantidad: {prod.quantity}</p>
+                        <Button variant='contained' color='error' onClick={() => {removeFromCart(prod.id)}}>Eliminar</Button>
+                    </div>
+            ))
+            : <h3>No tienes productos en el Carrito, ve a comprar algo!</h3>
         }
         </section>
-        <hr/>
         <div className='cartViewBtn'>
-            <Button variant='contained' color='secondary' onClick={emptyCart}>Vaciar</Button>
-            <Button variant='contained' color='success'>Finalizar</Button>
+            <Button variant='contained' color='secondary' disabled={cartItems.length === 0} onClick={emptyCart}>Vaciar</Button>
+            <Button variant='contained' color='success' disabled={cartItems.length === 0}>Finalizar</Button>
         </div>
     </main>
     )

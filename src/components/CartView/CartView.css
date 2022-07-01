@@ -16,6 +16,10 @@ h2 {
     gap: 50px;
 }
 
+.cartView h3, p, Button {
+    padding: 5px;
+}
+
 .cartViewBtn {
     display: flex;
     justify-content: center;
