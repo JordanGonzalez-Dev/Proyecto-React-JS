@@ -24,7 +24,7 @@ export const CartView = () => {
         </section>
         <hr/>
         <div>
-            <button onClick={vaciarCarrito}>Vaciar</button>
+            <button onClick={emptyCart}>Vaciar</button>
             <button>Finalizar</button>
         </div>
     </div>

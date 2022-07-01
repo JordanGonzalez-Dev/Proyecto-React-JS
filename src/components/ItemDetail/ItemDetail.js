@@ -7,7 +7,7 @@ import { Button } from "@mui/material";
 
 export const ItemDetail = ({item}) => {
 
-    const {agregarAlCarrito, isInCart} = useContext(CartContext);
+    const {addToCart, isInCart} = useContext(CartContext);
 
     const [quantity, setQuantity] = useState(null);
     console.log("quantity:" + quantity );
@@ -16,7 +16,7 @@ export const ItemDetail = ({item}) => {
         setQuantity(quantity);
 
         if (quantity > 0) {
-            agregarAlCarrito({...item, quantity})
+            addToCart({...item, quantity})
         }
     }
 

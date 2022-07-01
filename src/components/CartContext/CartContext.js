@@ -4,32 +4,32 @@ export const CartContext = createContext()
 
 export const CartContextProvider = ({children}) =>{
     
-    const [carrito, setCarrito] = useState([])
+    const [cartItems, setCartItems] = useState([])
 
-    const agregarAlCarrito = (item) => {
-        setCarrito([...carrito, item])
-        console.log(carrito)
+    const addToCart = (item) => {
+        setCartItems([...cartItems, item])
+        console.log(cartItems)
     }
-    const vaciarCarrito = () => {
-        setCarrito([])
+    const emptyCart = () => {
+        setCartItems([])
     }
-    const removerDelCarrito = (id) => {
-        setCarrito(carrito.filter(prod => prod.id !==id))
+    const removeFromCart = (id) => {
+        setCartItems(cartItems.filter(prod => prod.id !==id))
     }
-    const totalCantidad = () => {
-        return carrito.reduce((acc, prod) => acc + prod.quantity, 0)
+    const totalQuantity = () => {
+        return cartItems.reduce((acc, prod) => acc + prod.quantity, 0)
     }
     const isInCart = (id) => {
-        return carrito.some(prod => prod.id === id)
+        return cartItems.some(prod => prod.id === id)
     }
 
     return(
         <CartContext.Provider value={{
-            carrito,
-            agregarAlCarrito,
-            vaciarCarrito,
-            totalCantidad,
-            removerDelCarrito,
+            cartItems,
+            addToCart,
+            emptyCart,
+            removeFromCart,
+            totalQuantity,
             isInCart
         }}>
             {children}
