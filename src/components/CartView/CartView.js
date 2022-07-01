@@ -9,9 +9,9 @@ export const CartView = () => {
     console.log(cartItems);
 
     return (
-    <main className="cartView">
+    <main>
         <h2>Cart View</h2>
-        <section className=""> 
+        <section className="cartView"> 
         {
         cartItems.map((prod)=>(
         
@@ -26,7 +26,7 @@ export const CartView = () => {
         }
         </section>
         <hr/>
-        <div>
+        <div className='cartViewBtn'>
             <Button variant='contained' color='secondary' onClick={emptyCart}>Vaciar</Button>
             <Button variant='contained' color='success'>Finalizar</Button>
         </div>

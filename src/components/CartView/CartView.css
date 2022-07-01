@@ -1,6 +1,26 @@
+main {
+    width: 100%;
+}
+
+h2 {
+    text-align: center;
+    padding: 10px;
+}
+
 .cartView {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 20px;
+    gap: 50px;
+}
+
+.cartViewBtn {
+    display: flex;
+    justify-content: center;
+}
+
+.cartViewBtn Button {
+    margin: 5px;
 }
