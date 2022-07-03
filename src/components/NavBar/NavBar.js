@@ -24,7 +24,7 @@ export const NavBar = () => {
                         <Link className="btnNavBar" to="category/Notebooks">Notebooks</Link>
                     </li>
                 </ul>
-                <div className="iconCart">
+                <div className="contenedorCart">
                     <CartWidget/>
                 </div>
             </nav>

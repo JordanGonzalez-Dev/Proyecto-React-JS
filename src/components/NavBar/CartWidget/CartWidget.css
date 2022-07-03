@@ -1,3 +1,11 @@
+a {
+    cursor: pointer;
+}
+
+a:active {
+    transform: translateY(5px);
+}
+
 .iconCart {
     display: flex;
     justify-content: center;
@@ -12,10 +20,7 @@
     margin: 10px;
 }
 
-a {
-    cursor: pointer;
+.hiddenIconCart {
+    visibility: hidden;
 }
 
-a:active {
-    transform: translateY(5px);
-}

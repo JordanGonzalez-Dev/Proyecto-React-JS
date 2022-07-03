@@ -12,7 +12,7 @@ export const ItemListContainer = (props) => {
     const {catId} = useParams();
 
     useEffect(() => {
-        customFetch(3000, products)
+        customFetch(2000, products)
         .then((response) => {
             if (!catId) {
                 setItems(response)
@@ -25,7 +25,7 @@ export const ItemListContainer = (props) => {
 
     return (
         <>
-        <h1 className="text"> {texto} </h1>
+        <h1 className="text">{texto}</h1>
         <section className="containerSection">
             {
                 items.length ? <ItemList products={items}/> : <Spinner/>
