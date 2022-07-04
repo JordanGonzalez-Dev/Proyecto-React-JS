@@ -7,14 +7,23 @@ export const CartContextProvider = ({children}) =>{
     const [cartItems, setCartItems] = useState([])
 
     const addToCart = (item) => {
-        setCartItems([...cartItems, item])
-        console.log(cartItems)
+        const exist = cartItems.find(e => e.id === item.id);
+
+        if (exist) {
+            setCartItems(
+                cartItems.map(e => e.id === item.id ? { ...exist, quantity: exist.quantity + item.quantity} : e) 
+            );
+        } else {
+            setCartItems([...cartItems, { ...item, quantity: item.quantity ++}]);
+        }
+        // setCartItems([...cartItems, item])
+        // console.log(cartItems)
     }
     const emptyCart = () => {
         setCartItems([])
     }
     const removeFromCart = (id) => {
-        setCartItems(cartItems.filter(prod => prod.id !==id))
+        setCartItems(cartItems.filter(prod => prod.id !== id))
     }
     const totalQuantity = () => {
         return cartItems.reduce((acc, prod) => acc + prod.quantity, 0)

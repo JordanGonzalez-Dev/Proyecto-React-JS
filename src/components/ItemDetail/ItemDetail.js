@@ -7,7 +7,7 @@ import { Button } from "@mui/material";
 
 export const ItemDetail = ({item}) => {
 
-    const {addToCart, isInCart} = useContext(CartContext);
+    const {addToCart} = useContext(CartContext);
 
     const [quantity, setQuantity] = useState(null);
     console.log("quantity:" + quantity );
@@ -29,7 +29,7 @@ export const ItemDetail = ({item}) => {
                 <div className="contenedorDetalles">
                     <h1>{item.title}</h1>
                     {
-                        !isInCart(item.id) ? 
+                        !quantity ? 
                         <>
                         <h2>$ {item.price}</h2>
                         <p>Hay disponibles: {item.stock} unidades.</p>
