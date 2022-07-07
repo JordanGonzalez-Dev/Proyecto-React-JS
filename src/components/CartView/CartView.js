@@ -20,7 +20,11 @@ export const CartView = () => {
                         <h3 className="">{prod.title}</h3>
                         <p className="">Precio: ${prod.price}</p>
                         <p className="">Cantidad: {prod.quantity}</p>
-                        <Button variant='contained' color='error' onClick={() => {removeFromCart(prod.id)}}>Eliminar</Button>
+                        <Button 
+                        variant='contained' 
+                        color='error' 
+                        onClick={() => removeFromCart(prod.id, prod)}
+                        >Eliminar</Button>
                     </div>
             ))
             : <h3>No tienes productos en el Carrito, ve a comprar algo!</h3>
