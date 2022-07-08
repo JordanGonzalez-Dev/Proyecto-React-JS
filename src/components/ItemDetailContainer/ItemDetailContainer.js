@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import customFetch from "../utils/customFetch";
 import { ItemDetail } from "../ItemDetail/ItemDetail";
-import products from "../utils/products";
 import { Spinner } from "../Spinner/Spinner";
 import { useParams } from "react-router-dom";
+import { doc, getDoc } from 'firebase/firestore/lite';
+import { dataBase } from "../utils/Firebase/dataBase";
 
 export const ItemDetailContainer = () => {
     const [spinner, setSpinner] = useState(true);
@@ -11,12 +11,17 @@ export const ItemDetailContainer = () => {
     const {itemId} = useParams();
 
     useEffect(() => {
-        customFetch(2000, products)
-        .then((response) => {
-            setItem(response.find(e => e.id === Number(itemId)))
-        })
-        .catch(error => {console.log("Error: " + error)})
-        .finally(() => {setSpinner(false)})
+        const productsDocument = doc(dataBase, 'Productos', itemId)
+
+        getDoc(productsDocument)
+            .then((doc) => {
+                setItem({
+                    id: doc.id,
+                    ...doc.data()
+                })
+            })
+            .catch(error => {console.log("Error: " + error)})
+            .finally(() => {setSpinner(false)})
     },[itemId])
 
     return (

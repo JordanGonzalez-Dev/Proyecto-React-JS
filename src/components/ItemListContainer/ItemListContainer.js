@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./ItemListContainer.css";
-import customFetch from "../utils/customFetch";
-import products from "../utils/products";
 import { ItemList } from "../ItemList/ItemList";
 import { Spinner } from "../Spinner/Spinner";
+import { collection, getDocs, query, where } from 'firebase/firestore/lite';
+import { dataBase } from "../utils/Firebase/dataBase";
 
 export const ItemListContainer = (props) => {
     const {texto} = props;
@@ -12,15 +12,19 @@ export const ItemListContainer = (props) => {
     const {catId} = useParams();
 
     useEffect(() => {
-        customFetch(2000, products)
-        .then((response) => {
-            if (!catId) {
-                setItems(response)
-            } else {
-                setItems(response.filter(e => e.category === catId))
-            }
-        })
-        .catch(error => {console.log("Error: " + error)})
+        const productsCollection = collection(dataBase, 'Productos');
+
+        const q = catId ? query((productsCollection), where('category', '==', catId)) : productsCollection;
+
+        getDocs(q)
+            .then((collection) => {
+                const items = collection.docs.map((doc) => ({
+                    id: doc.id,
+                    ...doc.data()
+                }))
+                setItems(items);
+            })
+            .catch(error => {console.log("Error: " + error)})
     }, [catId]);
 
     return (
