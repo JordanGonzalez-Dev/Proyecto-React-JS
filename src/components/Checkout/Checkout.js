@@ -1,12 +1,12 @@
 import { useContext, useState } from "react";
 import { CartContext } from "../CartContext/CartContext";
 import { dataBase } from "../utils/Firebase/dataBase";
-import { collection, Timestamp, addDoc, FieldValue} from "firebase/firestore/lite";
+import { collection, Timestamp, getDocs, writeBatch, query, where, documentId, addDoc } from "firebase/firestore/lite";
 import "./Checkout.css";
 import { Button } from "@mui/material";
 import exclamationTriangle from "./img/exclamation-triangle.svg";
+import Swal from "sweetalert2";
 // import { validationUserInput } from "../utils/Firebase/validationUserInput";
-// import Swal from "sweetalert2";
 
 export const Checkout = () => {
     const {cartItems, totalPrice, emptyCart} = useContext(CartContext);
@@ -25,9 +25,8 @@ export const Checkout = () => {
         })
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-
         // Esta función la quiero usar para que cuando meto mal los datos en los input, me avise que es inválido, pero no la terminé
         // validationUserInput(userInput);
 
@@ -38,24 +37,55 @@ export const Checkout = () => {
             total: totalPrice()
         }
 
-        const orderToCollection = collection(dataBase, "Orders")
-        addDoc(orderToCollection, purchaseOrder)
+        const batch = writeBatch(dataBase);
+        const orderRef = collection(dataBase, "Orders");
+        const productosRef = collection(dataBase, "Productos");
+        const q = query(productosRef, where(documentId(), 'in', cartItems.map(el => el.id)));
+
+        const outOfStock = [];
+        const productos = await getDocs(q);
+
+        productos.docs.forEach((doc)=>{
+            const itemToUpdate = cartItems.find((prod)=> prod.id === doc.id)
+
+            if(doc.data().stock >= itemToUpdate.counter){
+                batch.update(doc.ref, {
+                    stock: doc.data().stock - itemToUpdate.counter
+                })
+            } else {
+                outOfStock.push(itemToUpdate)
+                console.log(outOfStock)
+            }
+        })
+        
+        if(outOfStock.length > 0){
+            addDoc(orderRef, purchaseOrder)
             .then((response) => {
                 setOrderId(response.id);
+                batch.commit()
             })
             .catch(error => {console.log("Error: " + error)});
-            setOrderId(orderId);
-            emptyCart();
+                setOrderId(orderId);
+                emptyCart();
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'No hay stock de los siguientes productos: ',
+                text: outOfStock.map(el=> el.name).join(', ')
+            })
+        }
 
-        // ACA TRATO DE RESTAR -1 EN EL STOCK
 
-        const orderRef = dataBase.collection('Productos').doc({cartItems});
 
-        const decrement = orderRef.update({
-            stock: FieldValue.increment(-1)
-        });
-        
-        decrement();
+
+        // const orderToCollection = collection(dataBase, "Orders")
+        // addDoc(orderToCollection, purchaseOrder)
+        //     .then((response) => {
+        //         setOrderId(response.id);
+        //     })
+        //     .catch(error => {console.log("Error: " + error)});
+        //     setOrderId(orderId);
+        //     emptyCart();
             
         // if (orderId) {
         //     Swal.fire({
