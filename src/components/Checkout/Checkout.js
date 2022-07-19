@@ -1,24 +1,22 @@
 import { useContext, useState } from "react";
 import { CartContext } from "../CartContext/CartContext";
-import { Navigate } from "react-router-dom";
 import { dataBase } from "../utils/Firebase/dataBase";
-import { collection, Timestamp, addDoc } from "firebase/firestore/lite";
-// import { validationUserInput } from "../utils/Firebase/validationUserInput";
+import { collection, Timestamp, addDoc, FieldValue} from "firebase/firestore/lite";
 import "./Checkout.css";
 import { Button } from "@mui/material";
 import exclamationTriangle from "./img/exclamation-triangle.svg";
-import Swal from "sweetalert2";
+// import { validationUserInput } from "../utils/Firebase/validationUserInput";
+// import Swal from "sweetalert2";
 
 export const Checkout = () => {
     const {cartItems, totalPrice, emptyCart} = useContext(CartContext);
+    const [orderId, setOrderId] = useState();
 
     const  [userInput, setUserInput] = useState({
         nombre: "",
         phone: "",
         email: ""
     })
-
-    const [successfulPurchase, setSuccessfulPurchase] = useState([])
 
     const handleInputChange = (e) => {
         setUserInput({
@@ -39,34 +37,46 @@ export const Checkout = () => {
             date: Timestamp.fromDate(new Date()),
             total: totalPrice()
         }
+
         const orderToCollection = collection(dataBase, "Orders")
         addDoc(orderToCollection, purchaseOrder)
             .then((response) => {
-                setSuccessfulPurchase(response.id)
+                setOrderId(response.id);
             })
-            setSuccessfulPurchase(successfulPurchase);
-            console.log("ID compra: " + successfulPurchase);
+            .catch(error => {console.log("Error: " + error)});
+            setOrderId(orderId);
+            emptyCart();
 
-        if (successfulPurchase.length > 0) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Su orden ha sido registrada',
-                text: `Su numero de orden es ${successfulPurchase}`,
-                showConfirmButton: true,
-                confirmButtonText: 'Acepto!'
-            }).then((successfulPurchase) => {
-                if (successfulPurchase.isConfirmed) {
-                    emptyCart();
-                }
-            })
-        }
+        // ACA TRATO DE RESTAR -1 EN EL STOCK
+
+        const orderRef = dataBase.collection('Productos').doc({cartItems});
+
+        const decrement = orderRef.update({
+            stock: FieldValue.increment(-1)
+        });
+        
+        decrement();
+            
+        // if (orderId) {
+        //     Swal.fire({
+        //         icon: 'success',
+        //         title: 'Su orden ha sido registrada',
+        //         text: `Su numero de orden es ${orderId}`,
+        //         showConfirmButton: true,
+        //         confirmButtonText: 'Acepto!'
+        //     }).then((orderId) => {
+        //         if (orderId.isConfirmed) {
+        //             emptyCart();  
+        //         }
+        //     })
+        // }
     }
 
     return (
         <>
             {
-                cartItems.length === 0
-                ? <Navigate to="/"/>
+                orderId
+                ? <h1>ID de compra: {orderId}</h1>
                 :
                 <>
                     <h2>Resumen de compra</h2>
