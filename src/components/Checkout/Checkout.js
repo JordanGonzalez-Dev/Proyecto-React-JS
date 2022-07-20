@@ -1,17 +1,17 @@
 import { useContext, useState } from "react";
 import { CartContext } from "../CartContext/CartContext";
 import { dataBase } from "../utils/Firebase/dataBase";
-import { collection, Timestamp, getDocs, writeBatch, query, where, documentId, addDoc } from "firebase/firestore/lite";
+import { collection, Timestamp, getDoc, writeBatch, addDoc, doc } from "firebase/firestore/lite";
 import "./Checkout.css";
 import { Button } from "@mui/material";
 import exclamationTriangle from "./img/exclamation-triangle.svg";
-import Swal from "sweetalert2";
+// import Swal from "sweetalert2";
 // import { validationUserInput } from "../utils/Firebase/validationUserInput";
 
 export const Checkout = () => {
     const {cartItems, totalPrice, emptyCart} = useContext(CartContext);
+    
     const [orderId, setOrderId] = useState();
-
     const  [userInput, setUserInput] = useState({
         nombre: "",
         phone: "",
@@ -25,7 +25,7 @@ export const Checkout = () => {
         })
     }
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         // Esta función la quiero usar para que cuando meto mal los datos en los input, me avise que es inválido, pero no la terminé
         // validationUserInput(userInput);
@@ -38,68 +38,45 @@ export const Checkout = () => {
         }
 
         const batch = writeBatch(dataBase);
-        const orderRef = collection(dataBase, "Orders");
-        const productosRef = collection(dataBase, "Productos");
-        const q = query(productosRef, where(documentId(), 'in', cartItems.map(el => el.id)));
-
         const outOfStock = [];
-        const productos = await getDocs(q);
 
-        productos.docs.forEach((doc)=>{
-            const itemToUpdate = cartItems.find((prod)=> prod.id === doc.id)
+        cartItems.forEach((productoEnCart) => {
+            getDoc(doc(dataBase, "Productos", productoEnCart.id)).then(
+                async (documentSnapshot) => {
+                    const producto = {
+                    ...documentSnapshot.data(),
+                    id: documentSnapshot.id,
+                    };
 
-            if(doc.data().stock >= itemToUpdate.counter){
-                batch.update(doc.ref, {
-                    stock: doc.data().stock - itemToUpdate.counter
-                })
-            } else {
-                outOfStock.push(itemToUpdate)
-                console.log(outOfStock)
-            }
-        })
-        
-        if(outOfStock.length > 0){
-            addDoc(orderRef, purchaseOrder)
-            .then((response) => {
-                setOrderId(response.id);
-                batch.commit()
-            })
-            .catch(error => {console.log("Error: " + error)});
-                setOrderId(orderId);
-                emptyCart();
-        } else {
-            Swal.fire({
-                icon: 'error',
-                title: 'No hay stock de los siguientes productos: ',
-                text: outOfStock.map(el=> el.name).join(', ')
-            })
-        }
+                    if (producto.stock >= productoEnCart.quantity) {
+                        batch.update(doc(dataBase, "Productos", producto.id), {
+                            stock: producto.stock - productoEnCart.quantity,
+                        });
+                    } else {
+                        outOfStock.push(producto);
+                    }
 
-
-
-
-        // const orderToCollection = collection(dataBase, "Orders")
-        // addDoc(orderToCollection, purchaseOrder)
-        //     .then((response) => {
-        //         setOrderId(response.id);
-        //     })
-        //     .catch(error => {console.log("Error: " + error)});
-        //     setOrderId(orderId);
-        //     emptyCart();
-            
-        // if (orderId) {
-        //     Swal.fire({
-        //         icon: 'success',
-        //         title: 'Su orden ha sido registrada',
-        //         text: `Su numero de orden es ${orderId}`,
-        //         showConfirmButton: true,
-        //         confirmButtonText: 'Acepto!'
-        //     }).then((orderId) => {
-        //         if (orderId.isConfirmed) {
-        //             emptyCart();  
-        //         }
-        //     })
-        // }
+                    if (outOfStock.length === 0) {
+                        addDoc(collection(dataBase, "Orders"), purchaseOrder)
+                            .then(({ id }) => {
+                                setOrderId(id);
+                                batch.commit()
+                            })
+                            .catch((err) => {
+                            console.log(err);
+                            setOrderId(orderId);
+                            emptyCart();
+                            });
+                    } else {
+                        let mensaje = "";
+                        for (const producto of outOfStock) {
+                            mensaje += `${producto.title}`;
+                        }
+                        console.log(`No hay stock suficiente para los siguientes productos: ${mensaje}`);
+                    }
+                }
+            );
+        });
     }
 
     return (
