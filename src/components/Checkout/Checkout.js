@@ -64,9 +64,9 @@ export const Checkout = () => {
                             })
                             .catch((err) => {
                             console.log(err);
-                            setOrderId(orderId);
-                            emptyCart();
                             });
+                            setOrderId(orderId)
+                            emptyCart()
                     } else {
                         let mensaje = "";
                         for (const producto of outOfStock) {
