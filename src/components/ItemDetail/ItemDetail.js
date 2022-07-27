@@ -7,7 +7,7 @@ import { Button } from "@mui/material";
 
 export const ItemDetail = ({item}) => {
 
-    const {addToCart} = useContext(CartContext);
+    const {addToCart, cartItems} = useContext(CartContext);
 
     const [quantity, setQuantity] = useState(null);
     console.log("quantity:" + quantity );
@@ -20,6 +20,15 @@ export const ItemDetail = ({item}) => {
         }
     }
 
+    const inCart = cartItems.find(p => p.id === item.id);
+
+    const update= ()=> {
+        if (inCart) {
+            const updateStock = inCart.stock - inCart.quantity; 
+            return updateStock;
+        }
+    }
+    
     return (
         <>
             <div key={item.id} className="contenedorItemDetail">
@@ -32,8 +41,9 @@ export const ItemDetail = ({item}) => {
                         !quantity ? 
                         <>
                         <h2>$ {item.price}</h2>
-                        <p>Hay disponibles: {item.stock} unidades.</p>
-                        <ItemCount stock={item.stock} initial={1} onAdd={onAdd}/>
+                        {inCart ? <p>Hay disponibles: {update()} unidades.</p> 
+                        : <p>Hay disponibles: {item.stock} unidades.</p>}
+                        <ItemCount stock={item.stock} initial={1} onAdd={onAdd} updateStock={update()}/>
                         </> : 
                         <Link to="/cart">
                             <Button variant="contained" color="secondary">{`Finalizar compra (Cantidad: ${quantity})`}</Button>

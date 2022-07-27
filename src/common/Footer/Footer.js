@@ -10,7 +10,7 @@ export const Footer = () => {
                 <Link to="/" className="logoFooter">
                     <img src={logo} alt="Logo de Gameware" />
                 </Link>
-                <p>&copy; 2022 - Todos los derechos reservados.</p>
+                <p>&copy; 2022 - Tienda Gameware - Hecha por Jordan González</p>
             </div>
         </footer>
     );

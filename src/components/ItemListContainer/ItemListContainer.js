@@ -5,7 +5,6 @@ import { Spinner } from "../../helpers/Spinner/Spinner";
 import { useParams } from "react-router-dom";
 import { collection, getDocs, query, where } from 'firebase/firestore/lite';
 import { dataBase } from "../../firebase/config/dataBase";
-import { Filter } from "../Filter/Filter"
 
 export const ItemListContainer = () => {
     const [items, setItems] = useState([]);
@@ -30,7 +29,6 @@ export const ItemListContainer = () => {
     return (
         <section>
             <h1 className="title">Productos</h1>
-            <Filter/>
             <article className="containerSection">
                 {
                     items.length ? <ItemList products={items}/> : <Spinner/>

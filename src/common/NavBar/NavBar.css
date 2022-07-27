@@ -13,8 +13,10 @@
 }
 
 .btnNavBar li {
-    text-align: center;
+    background-color: rgb(165, 0, 96);
     padding: 10px;
+    border-radius: 8%;
+    border: solid 2px rgb(204, 0, 119);
 }
 
 .contenedorCart {
