@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 export const CartView = () => {
 
     const {cartItems, emptyCart, removeFromCart, totalPrice} = useContext(CartContext);
-    console.log(cartItems);
 
     return (
     <section>

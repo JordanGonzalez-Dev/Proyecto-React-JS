@@ -10,8 +10,7 @@ export const ItemDetail = ({item}) => {
     const {addToCart, cartItems} = useContext(CartContext);
 
     const [quantity, setQuantity] = useState(null);
-    console.log("quantity:" + quantity );
-
+    
     function onAdd(quantity) {
         setQuantity(quantity);
 
@@ -46,7 +45,7 @@ export const ItemDetail = ({item}) => {
                         <ItemCount stock={item.stock} initial={1} onAdd={onAdd} updateStock={update()}/>
                         </> : 
                         <Link to="/cart">
-                            <Button variant="contained" color="secondary">{`Finalizar compra (Cantidad: ${quantity})`}</Button>
+                            <Button variant="contained" color="secondary">{`Ir al Carrito (Cantidad: ${quantity})`}</Button>
                         </Link>
                     }
                 </div>

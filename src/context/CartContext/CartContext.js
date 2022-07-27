@@ -15,7 +15,6 @@ export const CartContextProvider = ({children}) => {
             );
         } else {
             setCartItems([...cartItems, item])
-            console.log(cartItems)
         }
     }
 

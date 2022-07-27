@@ -27,9 +27,9 @@ export const ItemListContainer = () => {
     }, [catId]);
 
     return (
-        <section>
+        <section className="containerSection">
             <h1 className="title">Productos</h1>
-            <article className="containerSection">
+            <article>
                 {
                     items.length ? <ItemList products={items}/> : <Spinner/>
                 }

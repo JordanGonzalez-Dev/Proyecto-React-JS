@@ -26,9 +26,3 @@
 .contenedorDetalles Button {
     margin-top: 30px;
 }
-
-#spinner {
-    display: flex;
-    justify-content: center;
-    padding: 40px;
-}

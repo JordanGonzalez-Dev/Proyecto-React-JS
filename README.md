@@ -18,6 +18,8 @@ El proyecto contiene detalles de Producto, filtros por categorías y un formular
 - React JS :white_check_mark:
 - React Router DOM :white_check_mark:
 - Firebase :white_check_mark:
+- MUI :white_check_mark:
+- SweetAlert2 :white_check_mark:
 
 ## Deployment
 

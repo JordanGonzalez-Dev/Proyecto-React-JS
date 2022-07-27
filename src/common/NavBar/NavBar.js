@@ -15,7 +15,7 @@ export const NavBar = () => {
                 </div>
                 <ul className="contenedorBotones btnNavBar">
                     <li>
-                        <Link className="btnNavBar" to="category/Placas de Video">Placas de Video</Link>
+                        <Link className="btnNavBar" to="category/Placas-de-Video">Placas de Video</Link>
                     </li>
                     <li>
                         <Link className="btnNavBar" to="category/Monitores">Monitores</Link>

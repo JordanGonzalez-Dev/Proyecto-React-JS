@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 
 export const Spinner = () => {
     return (
-        <Box className='spinner'>
+        <Box sx={{ display: 'flex', justifyContent: 'center', }}>
             <CircularProgress color='secondary'/>
         </Box>
     );

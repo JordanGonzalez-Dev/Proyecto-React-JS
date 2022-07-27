@@ -5,7 +5,6 @@ import Button from '@mui/material/Button';
 export const ItemCount = ({stock, initial, onAdd, updateStock}) => {
 
     const [count, setCount] = useState(initial);
-    console.log("count:" + count );
     
     function add () {
         if (count < stock) {

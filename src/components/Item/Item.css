@@ -1,17 +1,67 @@
 .card {
-    max-width: 250px;
-    text-align: center;
+    display: inline-block;
+    position: relative;
+    width: 350px;
+    min-width: 350px;
+    height: 350px;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.3);
+    margin: 0;
 }
 
-.btnVerMas {
-    text-align: center;
-    margin: 20px;
-}
-
-.btnVerMas a {
-    border: solid 2px black;
-    border-radius: 8%;
+.card-profile-img {
+    width: 100%;
+    max-height: 210px;
+    max-width: 210px;
     padding: 5px;
-    background-color: rgb(90, 0, 150);
-    color: white;
+}
+
+.card-description-bk {
+    background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
+    background-size: 400% 400%;
+    animation: gradientAnim 15s ease infinite;
+    border-radius: 30px;
+    position: absolute;
+    top: 55%;
+    left: -5px;
+    height: 65%;
+    width: 108%;
+    transform: skew(19deg, -9deg);
+}
+
+.card-description {
+    position: absolute;
+    color: #fff;
+    font-weight: 900;
+    left: 150px;
+    bottom: 26%;
+}
+
+.card-btn {
+    position: absolute;
+    color: #fff;
+    right: 30px;
+    bottom: 10%;
+    padding: 10px 20px;
+    border: 1px solid #fff;
+}
+
+.card-btn a {
+    color: #fff;
+}
+
+.card-date {
+    position: absolute;
+    color: #fff;
+    left: 30px;
+    bottom: 10%;
+}
+
+.btnTrans {
+    cursor: pointer;
+}
+
+.btnTrans:active {
+    transform: translateY(5px);
 }

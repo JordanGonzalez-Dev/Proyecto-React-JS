@@ -1,4 +1,10 @@
-.containerSection {
+section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.containerSection article {
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
