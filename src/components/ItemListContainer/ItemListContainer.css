@@ -1,11 +1,7 @@
-.text {
-    text-align: center;
-    padding: 20px;
-}
-
 .containerSection {
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
     justify-content: center;
+    margin: 25px 0px;
 }

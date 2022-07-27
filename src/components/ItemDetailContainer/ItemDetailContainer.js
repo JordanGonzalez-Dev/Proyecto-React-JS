@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { ItemDetail } from "../ItemDetail/ItemDetail";
-import { Spinner } from "../Spinner/Spinner";
+import { Spinner } from "../../helpers/Spinner/Spinner";
 import { useParams } from "react-router-dom";
 import { doc, getDoc } from 'firebase/firestore/lite';
-import { dataBase } from "../utils/Firebase/dataBase";
+import { dataBase } from "../../firebase/config/dataBase";
+import { Filter } from "../Filter/Filter";
 
 export const ItemDetailContainer = () => {
     const [spinner, setSpinner] = useState(true);
@@ -25,10 +26,13 @@ export const ItemDetailContainer = () => {
     },[itemId])
 
     return (
-        <section id="spinner">
-            {
-                spinner ? <Spinner/> : <ItemDetail item={item}/>
-            }
-        </section>
+        <>
+            <Filter/>
+            <section id="spinner">
+                {
+                    spinner ? <Spinner/> : <ItemDetail item={item}/>
+                }
+            </section>
+        </>
     )
 }

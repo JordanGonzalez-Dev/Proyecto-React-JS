@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import "./ItemListContainer.css";
 import { ItemList } from "../ItemList/ItemList";
-import { Spinner } from "../Spinner/Spinner";
+import { Spinner } from "../../helpers/Spinner/Spinner";
+import { useParams } from "react-router-dom";
 import { collection, getDocs, query, where } from 'firebase/firestore/lite';
-import { dataBase } from "../utils/Firebase/dataBase";
+import { dataBase } from "../../firebase/config/dataBase";
+import { Filter } from "../Filter/Filter"
 
-export const ItemListContainer = (props) => {
-    const {texto} = props;
+export const ItemListContainer = () => {
     const [items, setItems] = useState([]);
     const {catId} = useParams();
 
@@ -28,13 +28,14 @@ export const ItemListContainer = (props) => {
     }, [catId]);
 
     return (
-        <>
-        <h1 className="text">{texto}</h1>
-        <section className="containerSection">
-            {
-                items.length ? <ItemList products={items}/> : <Spinner/>
-            }
+        <section>
+            <h1 className="title">Productos</h1>
+            <Filter/>
+            <article className="containerSection">
+                {
+                    items.length ? <ItemList products={items}/> : <Spinner/>
+                }
+            </article>
         </section>
-        </>
     );
 };

@@ -1,6 +1,41 @@
-.inputContainer {
-    height: 100vh;
+h1 {
+    text-align: center;
+    padding: 20px;
+}
+
+h2 {
+    text-align: center;
+    padding: 20px;
+}
+
+.formContainer {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formContainer form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.formContainer h3 {
+    padding-bottom: 20px;
+}
+
+.formContainer p {
+    color: red;
+    font-size: small;
+    padding: 0%;
+}
+
+.formContainer input {
+    border: solid 1px #000;
+    border-radius: 5px;
+    padding: 5px;
 }

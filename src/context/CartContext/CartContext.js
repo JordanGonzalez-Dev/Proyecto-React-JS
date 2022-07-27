@@ -2,9 +2,9 @@ import React, { createContext, useState } from "react"
 
 export const CartContext = createContext()
 
-export const CartContextProvider = ({children}) =>{
+export const CartContextProvider = ({children}) => {
     
-    const [cartItems, setCartItems] = useState([])
+    const [cartItems, setCartItems] = useState([]);
 
     const addToCart = (item) => {
         const exist = cartItems.find(e => e.id === item.id);
@@ -47,7 +47,7 @@ export const CartContextProvider = ({children}) =>{
         return cartItems.some(prod => prod.id === id)
     }
 
-    return(
+    return (
         <CartContext.Provider value={{
             cartItems,
             addToCart,

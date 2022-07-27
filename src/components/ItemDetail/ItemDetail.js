@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import "./ItemDetail.css";
 import { ItemCount } from "../ItemCount/ItemCount";
-import { CartContext } from "../CartContext/CartContext";
+import { CartContext } from "../../context/CartContext/CartContext";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 

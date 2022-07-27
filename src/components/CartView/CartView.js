@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { CartContext } from '../CartContext/CartContext';
+import { CartContext } from '../../context/CartContext/CartContext';
 import { Button } from '@mui/material';
 import "./CartView.css";
 import { Link } from 'react-router-dom';
@@ -10,9 +10,9 @@ export const CartView = () => {
     console.log(cartItems);
 
     return (
-    <main>
+    <section>
         <h2>Carrito</h2>
-        <section className="cartView"> 
+        <article className="cartView"> 
         {
             cartItems.length ?
             cartItems.map((prod)=>(
@@ -30,7 +30,7 @@ export const CartView = () => {
             ))
             : <h3>No tienes productos en el Carrito, ve a comprar algo!</h3>
         }
-        </section>
+        </article>
         {
             cartItems.length ?
             <div className='cartViewBtn'>
@@ -39,11 +39,11 @@ export const CartView = () => {
                     <Button variant='contained' color='success' disabled={cartItems.length === 0}>Finalizar</Button>
                 </Link>
             </div>
-            : <Link to={"/"} className="cartViewBtn">
+            : <Link to={"/products"} className="cartViewBtn">
             <Button variant='contained' color='primary'>Volver al catálogo</Button>
             </Link>
         }
         
-    </main>
+    </section>
     )
 }
